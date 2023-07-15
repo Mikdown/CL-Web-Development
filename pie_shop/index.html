@@ -55,6 +55,11 @@
             </nav>
         </footer>
     </main>
-    
+    <script>
+        let links = document.querySelectorALL(".tag")
+        links.array.forEach(function(link) {
+            link.setAttribute("target", "_blank")
+        });
+    </script>  
 </body>
 </html>
