@@ -50,7 +50,9 @@
         <aside><img src="images/logo.png" alt="Bethany's Pie Shop" /></aside>
         <article>
             <h1>Order</h1>
-            <form action="http://localhost:7071/api/post" method="POST">
+            <form action="" method="post" target="_blank">
+                <input type="hidden" id="pieOrder" name="pieOrder">
+
                 <div class = "input-group">
                     <div><label for="first-name">First name</label></div>
                     <div><input type="text" name="first-name" id="first-name" /></div>
@@ -107,12 +109,34 @@
                 </ul>
             </nav>
         </footer>
-    </main>
-    <script>
-        let links = document.querySelectorALL(".tag")
-        links.array.forEach(function(link) {
-            link.setAttribute("target", "_blank")
-        });
-    </script>  
+    </main> 
 </body>
+<script>
+    window.addEventListener("DOMContentLoaded", function(e) {
+
+        const order = localStorage.getItem("order");
+
+        if(order) {
+            const pieOrder = JSON.parse(order);
+
+            const orderInput = document.querySelector("#pie-order");
+            orderInput.value = order;
+
+            const pie = document.querySelector(".pie");
+
+            const title = pie.querySelector(".title");
+            const price = pie.querySelector(".price");
+            const desc = pie.querySelector(".desc");
+
+            title.innerText = pieOrder.title;
+            price.innerText = pieOrder.price;
+            desc.innerText = pieOrder.desc;
+
+            const img = pie.querySelector("img");
+            img.setAttribute("src", `images/${pieOrder.id}.png`);
+            img.setAttribute("alt", pieOrder.title);
+        }
+
+    });
+</script>
 </html>
